@@ -96,4 +96,27 @@ router.get('/prioridad/:nivel', async(req,res)=>{
     }  
 })
 
+router.get('/proximas-vencer/:dias', async(req,res)=>{
+    try {
+        let {dias} = req.params;
+        dias = parseInt(dias);
+
+        const hoy = new Date();
+        const fechaLimite = new Date();
+        fechaLimite.setDate(hoy.getDate() + dias);
+
+        let tareas = await modelTarea.find({"fecha-limite":{
+            $gte: hoy,
+            $lte: fechaLimite
+        }});
+        
+        if(tareas.length == 0){
+         return res.status(400).send({ mensaje: "No se encontraron tareas próximas a vencer", body: tareas});
+        } 
+        res.status(200).send({ mensaje: "Tareas próximas a vencer", body: tareas });
+    } catch (error) {
+        res.status(400).send({ mensaje: "Error filtrar tareas", error: error });
+    }  
+})
+
 module.exports = router;
