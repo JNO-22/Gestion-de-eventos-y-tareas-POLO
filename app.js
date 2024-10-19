@@ -1,11 +1,13 @@
 const dbConnect = require("./config/db");
 const eventoRouter = require("./routes/eventos");
 const userRouter = require("./routes/user");
+const tareasRouter = require("./routes/tareas");
 const express = require("express");
 const app = express();
 
 app.use(express.json());
 app.use(eventoRouter, userRouter);
+app.use("/tareas", tareasRouter);
 
 dbConnect()
   .then(() => {
