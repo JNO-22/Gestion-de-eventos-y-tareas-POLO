@@ -18,6 +18,10 @@ const tareaSchema =  new mongoose.Schema(
             type: String,
             enum: ['alta', 'media', 'baja'],
             default: 'media'
+        },
+        completada: {
+            type: Boolean,
+            default: false
         }
     }
 )
