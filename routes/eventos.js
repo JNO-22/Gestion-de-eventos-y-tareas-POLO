@@ -50,7 +50,7 @@ router.put("/eventos/:id", async (req, res) => {
     if (!eventoActualizado) {
       res.status(404).send({ mensaje: "Evento no encontrado" });
     }
-    res.statur(200).send(eventoActualizado);
+    res.status(200).send(eventoActualizado);
   } catch (error) {
     res.status(400).send({ mensaje: "Error al actualizar el evento", error });
   }
